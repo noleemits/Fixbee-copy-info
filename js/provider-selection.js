@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log("loaded");
     const providerSelect = document.querySelector('select[name="provider_id"]');
     if (providerSelect) {
         providerSelect.addEventListener('change', function() {

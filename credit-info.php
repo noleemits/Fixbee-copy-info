@@ -1,5 +1,5 @@
 <?php
-
+/*
 function populate_and_store_user_credit_info( $form_id = null, $form_fields = null ) {
     // Your existing populate_and_store_user_credit_info function here
 }
@@ -11,3 +11,4 @@ function ajax_populate_and_store_user_credit_info() {
 }
 add_action('wp_ajax_populate_and_store_user_credit_info', 'ajax_populate_and_store_user_credit_info');
 add_action('wp_ajax_nopriv_populate_and_store_user_credit_info', 'ajax_populate_and_store_user_credit_info');
+*/
