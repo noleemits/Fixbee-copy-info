@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("loaded");
     const providerSelect = document.querySelector('select[name="provider_id"]');
     if (providerSelect) {
         providerSelect.addEventListener('change', function() {
             const provider_id = this.value;
-            const ajaxurl = '/wp-admin/admin-ajax.php';
+            const ajaxurl = '/wp-admin/admin-ajax.php';  
 
             jQuery.post(
                 ajaxurl, 
@@ -13,9 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     'provider_id': provider_id
                 },
                 function(response) {
-                    console.log('Server Response:', response);
+                    console.log('Credit info has been stored in the cookie.');
                 }
             );
         });
     }
 });
+

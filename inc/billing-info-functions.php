@@ -15,13 +15,13 @@ function populate_and_store_user_credit_info( $form_id = null, $form_fields = nu
 
     $provider_email = get_post_meta($provider_id, 'select_user', true);
 
-    if ( !$provider_email ) {
+    if (!$provider_email) {
         return;
     }
 
     $user = get_user_by('email', $provider_email);
 
-    if ( !$user ) {
+    if (!$user) {
         return;
     }
 
@@ -31,20 +31,17 @@ function populate_and_store_user_credit_info( $form_id = null, $form_fields = nu
     $credit_card_expiration_date = get_user_meta( $related_user_id, 'credit_card_expiration_date', true );
     $credit_card_cvv_number = get_user_meta( $related_user_id, 'credit_card_cvv_number', true );
 
-     // Format the expiration date as "MM / YY"
-     $formatted_expiry = date('m / y', strtotime($credit_card_expiration_date));
-
-        // Store the information in a cookie (expires in 1 hour)
-        $credit_info = json_encode(array(
-            'number' => $creditcard_number,
-            'expiry' => $formatted_expiry,
-            'cvv' => $credit_card_cvv_number
-        ));
+    $credit_info = json_encode(array(
+        'number' => $creditcard_number,
+        'expiry' => $credit_card_expiration_date,
+        'cvv' => $credit_card_cvv_number
+    ));
 
     setcookie('credit_card_info', $credit_info, time() + 3600, '/');
-
-    error_log('Credit card info stored in cookie for provider: ' . $provider_id);
 }
+
+// Attach the call hook to the JetFormBuilder form
+add_action('jet-form-builder/form-handler/before-send', 'populate_and_store_user_credit_info', 10, 2);
 
 // Handle the AJAX call to populate and store credit info
 function ajax_populate_and_store_user_credit_info() {
